@@ -210,6 +210,26 @@
     ]
   },
   {
+    "objectID": "content/04_binning.html#analisando-a-qualidade-dos-bins-pré-e-pós-refinamento-do-dastool",
+    "href": "content/04_binning.html#analisando-a-qualidade-dos-bins-pré-e-pós-refinamento-do-dastool",
+    "title": "4  Binning",
+    "section": "4.13 Analisando a qualidade dos bins pré e pós refinamento do DASTool",
+    "text": "4.13 Analisando a qualidade dos bins pré e pós refinamento do DASTool\nO BUSCO fornece medidas para avaliação quantitativa da montagem do genoma, do conjunto de genes e da completude do transcriptoma, com base em expectativas evolutivamente informadas do conteúdo genético de ortólogos de cópia única quase universais.\nMude para o diretório Pipeline/dastool\nDesative o ambiente conda “binning’\nconda deactivate\nAtive o ambiente conda “metagenomicsTraining”\nconda activate metagenomicsTraining",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Binning</span>"
+    ]
+  },
+  {
+    "objectID": "content/04_binning.html#executando-o-busco",
+    "href": "content/04_binning.html#executando-o-busco",
+    "title": "4  Binning",
+    "section": "4.14 Executando o BUSCO",
+    "text": "4.14 Executando o BUSCO\n busco -i ../bins/maxbin/maxbin.001.fasta -o busco_maxbin001 -m genome -l bacteria_odb10 -c 12\nVisualize o resultado de forma gráfica:\nbusco --plot busco_maxbin001",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Binning</span>"
+    ]
+  },
+  {
     "objectID": "content/05_taxonomia.html",
     "href": "content/05_taxonomia.html",
     "title": "5  Classificação Taxonômica",

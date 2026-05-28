@@ -385,6 +385,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#converter-maxbin2" id="toc-converter-maxbin2" class="nav-link" data-scroll-target="#converter-maxbin2"><span class="header-section-number">4.10</span> Converter MaxBin2</a></li>
   <li><a href="#alteração-do-formato-dos-arquivos-de-bins-do-concoct" id="toc-alteração-do-formato-dos-arquivos-de-bins-do-concoct" class="nav-link" data-scroll-target="#alteração-do-formato-dos-arquivos-de-bins-do-concoct"><span class="header-section-number">4.11</span> Alteração do formato dos arquivos de bins do CONCOCT</a></li>
   <li><a href="#dastool" id="toc-dastool" class="nav-link" data-scroll-target="#dastool"><span class="header-section-number">4.12</span> DASTool</a></li>
+  <li><a href="#analisando-a-qualidade-dos-bins-pré-e-pós-refinamento-do-dastool" id="toc-analisando-a-qualidade-dos-bins-pré-e-pós-refinamento-do-dastool" class="nav-link" data-scroll-target="#analisando-a-qualidade-dos-bins-pré-e-pós-refinamento-do-dastool"><span class="header-section-number">4.13</span> Analisando a qualidade dos bins pré e pós refinamento do DASTool</a></li>
+  <li><a href="#executando-o-busco" id="toc-executando-o-busco" class="nav-link" data-scroll-target="#executando-o-busco"><span class="header-section-number">4.14</span> Executando o BUSCO</a></li>
   </ul>
 </nav>
     </div>
@@ -493,6 +495,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dastool" class="level2" data-number="4.12">
 <h2 data-number="4.12" class="anchored" data-anchor-id="dastool"><span class="header-section-number">4.12</span> DASTool</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">DAS_Tool</span> <span class="at">-i</span> ../../../bins/metabat/metabat_scaffolds2bin.tsv,../../../bins/maxbin/maxbin_scaffolds2bin.tsv,../../../bins/concoct/clustering_merged_noheader.tsv <span class="at">-l</span> metabat,maxbin,concoct <span class="at">-c</span> final.contigs.fa <span class="at">-o</span> ../../../dastool/dastool <span class="at">--search_engine</span> diamond <span class="at">--threads</span> 12 <span class="at">--write_bins</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="analisando-a-qualidade-dos-bins-pré-e-pós-refinamento-do-dastool" class="level2" data-number="4.13">
+<h2 data-number="4.13" class="anchored" data-anchor-id="analisando-a-qualidade-dos-bins-pré-e-pós-refinamento-do-dastool"><span class="header-section-number">4.13</span> Analisando a qualidade dos bins pré e pós refinamento do DASTool</h2>
+<p>O BUSCO fornece medidas para avaliação quantitativa da montagem do genoma, do conjunto de genes e da completude do transcriptoma, com base em expectativas evolutivamente informadas do conteúdo genético de ortólogos de cópia única quase universais.</p>
+<p>Mude para o diretório <strong>Pipeline/dastool</strong></p>
+<p>Desative o ambiente conda “binning’</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ative o ambiente conda “metagenomicsTraining”</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate metagenomicsTraining</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="executando-o-busco" class="level2" data-number="4.14">
+<h2 data-number="4.14" class="anchored" data-anchor-id="executando-o-busco"><span class="header-section-number">4.14</span> Executando o BUSCO</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a> <span class="ex">busco</span> <span class="at">-i</span> ../bins/maxbin/maxbin.001.fasta <span class="at">-o</span> busco_maxbin001 <span class="at">-m</span> genome <span class="at">-l</span> bacteria_odb10 <span class="at">-c</span> 12</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Visualize o resultado de forma gráfica:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">busco</span> <span class="at">--plot</span> busco_maxbin001</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
