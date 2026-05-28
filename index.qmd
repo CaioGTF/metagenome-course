@@ -14,6 +14,7 @@ O curso é dividido em 5 módulos:
 
 - Controle de qualidade e pré-processamento
 - Montagem
+- Binning
 - Classificação taxonômica
 - Anotação funcional
 
