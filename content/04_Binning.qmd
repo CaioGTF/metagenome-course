@@ -6,49 +6,79 @@ O passo de binning se trata do processo de agrupar sequências montadas da metag
 
 !(images/binning.png)
 
-## Adquirindo o banco de dados {#sec-bdalign}
-
-Mude o diretório atual para `"Pipeline/alignment/db"` (pois esse banco também será usado na seção [@sec-diamond], do alinhamento) e baixe o banco de dados de proteínas do NCBI-nr:
-
-::: callout-warning
-## Aviso
-
-O banco de dados é **muito grande** e **inviável** de se instalar em um computador pessoal.
-Use um cluster de alta performance ou ambientes similares!
-:::
+## Arquivos e ambiente conda necessários {#sec-bdalign}
+Desative o ambiente conda "metagenomicsTraining'
+```bash
+conda deactivate
+```
+Ative o ambiente conda "binning"
+```bash
+conda activate binning
+```
+Arquivos necessários:
 
 ```bash
-wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/nr.gz
-pigz -d nr.gz -p 8
+final.contigs.fa
+SRR579292_1.fastq
+SRR579292_2.fastq
 ```
 
-Construa um índice DIAMOND:
+Mude o diretório atual para `"Pipeline/data/megahit/SRR579292"`
+
+## Preparativos para a execução dos softwares de binning
+
+Faça a indexação dos contigs
 
 ```bash
-diamond makedb --in nr -d ../index/nr
+bowtie2-build final.contigs.fa contigs_db
 ```
 
-Mude o diretório atual para "Pipeline/taxonomic/db" e baixe os seguintes arquivos:
+Mapeie as reads:
 
 ```bash
-wget ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz
-wget ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/accession2taxid/prot.accession2taxid.gz
+bowtie2 -x contigs_db -1 ../../SRR579292_1.fastq -2 ../../SRR579292_2.fastq -p 12 | samtools view -bS - | samtools sort -@ 12 -o SRR579292_sorted.bam
 ```
 
-Esses são os bancos de dados que utilizaremos para executar o Kaiju
+Faça a indexação do arquivo BAM
 
-Extraia e descompacte os arquivos necessários:
 ```bash
-tar -xf taxdump.tar.gz nodes.dmp names.dmp
-pigz -d prot.accession2taxid.gz -p 8
+samtools index SRR579292_sorted.bam
+```
+Gere a profundidade
+
+```bash
+jgi_summarize_bam_contig_depths --outputDepth depth.txt SRR579292_sorted.bam
+```
+## Executando o Metabat2
+```bash
+ metabat2 -i final.contigs.fa -a depth.txt -o ../../../bins/metabat/bin -t 12 --minContig 1500
+```
+## Executando o Maxbin2
+
+```bash
+ run_MaxBin.pl -contig final.contigs.fa -abund depth.txt -out ../../../bins/maxbin/maxbin -thread 12
 ```
 
-Construa um índice Kaiju:
+## Arquivos e ambiente conda necessários para executar o CONCOCT
+Desative o ambiente conda "binning'
 ```bash
-kaiju-convertNR -t nodes.dmp -g prot.accession2taxid -e ~/miniconda3/envs/medusaPipeline/bin/kaiju-excluded-accessions.txt -a -o kaijuNR.fasta -i ../../alignment/db/nr
-kaiju-mkbwt -n 8 -a ACDEFGHIKLMNPQRSTVWY -o kaijuNR kaijuNR.fasta
-kaiju-mkfmi kaijuNR
+conda deactivate
 ```
+Ative o ambiente conda "concoct_env"
+```bash
+conda activate concoct_env
+```
+## Fragmentar contigs
+O CONCOCT trabalha melhor quebrando contigs grandes.
+
+```bash 
+cut_up_fasta.py final.contigs.fa -c 10000 -o 0 -m -b ../../../bins/concoct/contigs_10K.bed > ../../../bins/concoct/contigs_10K.fa
+```
+Gere a tabela de cobertura
+```bash
+concoct_coverage_table.py ../../../bins/concoct/contigs_10K.bed SRR579292_sorted.bam > ../../../bins/concoct/coverage_table.tsv
+```
+
 
 ::: callout-note
 ## Nota
