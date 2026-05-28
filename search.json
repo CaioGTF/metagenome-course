@@ -104,7 +104,7 @@
     "href": "content/04_binning.html#sec-bdalign",
     "title": "4  Binning",
     "section": "4.2 Arquivos e ambiente conda necessários",
-    "text": "4.2 Arquivos e ambiente conda necessários\nDesative o ambiente conda “metagenomicsTraining’\nconda deactivate\nAtive o ambiente conda “binning”\nconda activate binning\nArquivos necessários:\nfinal.contigs.fa\nSRR579292_1.fastq\nSRR579292_2.fastq\nMude o diretório atual para \"Pipeline/data/megahit/SRR579292\"",
+    "text": "4.2 Arquivos e ambiente conda necessários\nDesative o ambiente conda “metagenomicsTraining’\nconda deactivate\nAtive o ambiente conda “binning”\nconda activate binning\nArquivos necessários:\nfinal.contigs.fa\nSRR579292_1.fastq\nSRR579292_2.fastq\nCrie os seguintes diretórios em `“Pipeline”´:\nmkdir -p bins/metabat\nmkdir -p bins/maxbin\nmkdir -p bins/concoct\nmkdir -p dastool\nMude o diretório atual para \"Pipeline/data/megahit/SRR579292\"",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Binning</span>"
     ]
