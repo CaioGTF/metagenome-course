@@ -22,7 +22,14 @@ final.contigs.fa
 SRR579292_1.fastq
 SRR579292_2.fastq
 ```
+Crie os seguintes diretórios em `"Pipeline"´:
 
+```bash
+mkdir -p bins/metabat
+mkdir -p bins/maxbin
+mkdir -p bins/concoct
+mkdir -p dastool
+```
 Mude o diretório atual para `"Pipeline/data/megahit/SRR579292"`
 
 ## Preparativos para a execução dos softwares de binning
@@ -143,3 +150,4 @@ Visualize o resultado de forma gráfica:
 ```bash
 busco --plot busco_maxbin001
 ```
+![](images/busco_figure.png){fig-align="center"}
