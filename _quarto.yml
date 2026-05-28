@@ -12,8 +12,9 @@ book:
     - content/01_setup.qmd
     - content/02_qc.qmd
     - content/03_montagem.qmd
-    - content/04_taxonomia.qmd
-    - content/05_anotacao.qmd
+    - content/04_binning.qmd
+    - content/05_taxonomia.qmd
+    - content/06_anotacao.qmd
   reader-mode: true
   favicon: content/images/dalmolin_icon.svg
   site-url: https://dalmolingroup.github.io/metagenome-course/

@@ -4,7 +4,7 @@
 
 O passo de binning se trata do processo de agrupar sequências montadas da metagenômica (contigs/scaffolds) que provavelmente pertencem ao mesmo organismo.
 
-!(images/binning.png)
+![](images/binning.png){fig-align="center"}
 
 ## Arquivos e ambiente conda necessários {#sec-bdalign}
 Desative o ambiente conda "metagenomicsTraining'
