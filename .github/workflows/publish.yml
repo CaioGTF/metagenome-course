@@ -18,6 +18,10 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      # ADICIONE ESTE PASSO AQUI:
+      - name: Install TinyTeX (for PDF compilation)
+        run: quarto install tinytex
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
