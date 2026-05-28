@@ -7,7 +7,41 @@ e tipicamente acompanha um perfil de abundância desses táxons.
 
 ![[Ye et al, 2019](https://doi.org/10.1016/j.cell.2019.07.010)](images/sabeti_2019.jpg)
 
-## Adquirindo o banco de dados {#sec-bdalign}
+## Classificação taxonômica dos bins
+
+Realizamos a classificação taxonômica dos bins para táxons de Bacteria e Archaea de acordo com a referência GTDB-Tk (Chaumeil et al. 2022).
+## Adquirindo o banco de dados do GTDB-TK
+
+::: callout-warning
+## Aviso
+O banco de dados é **extremamente grande** e **inviável** (56GB) de se instalar em um computador pessoal.
+Use um cluster de alta performance ou servidores com ambientes similares!
+:::
+
+```bash
+download-db.sh
+```
+Descompacte o arquivo (~10h)
+
+```bash
+tar -xvf gtdbtk_r232_data.tar.gz
+```
+Exporte o banco de dados
+
+```bash
+export GTDBTK_DATA_PATH=~/.conda/envs/binning/share/gtdbtk-2.7.2/db/release232
+```
+## Execute o GTDB-TK
+
+```bash
+gtdbtk classify_wf --genome_dir ../../../dastool/dastool_DASTool_bins/ --out_dir ../../../dastool/gtdbtk --extension fa --cpus 12
+```
+Para visualizar os resultados
+```bash
+less -S ../../../dastool/gtdbtk/classify/gtdbtk.bac120.summary.tsv
+```
+
+## Adquirindo o banco de dados para o kaiju {#sec-bdalign}
 
 Mude o diretório atual para `"Pipeline/alignment/db"` (pois esse banco também será usado na seção [@sec-diamond], do alinhamento) e baixe o banco de dados de proteínas do NCBI-nr:
 
