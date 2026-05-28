@@ -78,28 +78,44 @@ Gere a tabela de cobertura
 ```bash
 concoct_coverage_table.py ../../../bins/concoct/contigs_10K.bed SRR579292_sorted.bam > ../../../bins/concoct/coverage_table.tsv
 ```
-
-
-::: callout-note
-## Nota
-
-Na chamada `kaiju-convertNR`, por padrão, são incluídas apenas sequências de Archaea, Bactérias e Vírus do NCBI-nr. Este comportamento pode ser alterado com o argumento `-l`, passando um arquivo de entrada como `~/miniconda3/envs/medusaPipeline/bin/kaiju-taxonlistEuk.tsv`. Este argumento utiliza apenas sequências com ancestrais listados no arquivo.
-:::
-
-## Realizando a classificação taxonômica
-
-Mude o diretório atual para "Pipeline/taxonomic" e execute a classificação taxonômica:
+Execute o CONCOCT
 ```bash
-kaiju -t db/nodes.dmp -f db/kaijuNR.fmi -i ../data/removal/unaligned_1.fastq -j ../data/removal/unaligned_2.fastq -o ../result/SRR579292_kaiju.out -z 8
+concoct --composition_file ../../../bins/concoct/concoct_contigs_10K.fa --coverage_file ../../../bins/concoct/coverage_table.tsv -b ../../../bins/concoct/
+```
+Mescle clusters fragmentados
+
+```bash
+merge_cutup_clustering.py ../../../bins/concoct/clustering_gt1000.csv > ../../../bins/concoct/clustering_merged.csv
+```
+## Preparar para DASTool
+Desative o ambiente conda "concoct_env'
+```bash
+conda deactivate
+```
+Ative o ambiente conda "binning"
+```bash
+conda activate binning
+```
+## Converter MetaBAT2
+```bash
+Fasta_to_Contig2Bin.sh -i ../../../bins/metabat/ -e fa > ../../../bins/metabat/metabat_scaffolds2bin.tsv
+```
+## Converter MaxBin2
+```bash
+Fasta_to_Contig2Bin.sh -i ../../../bins/maxbin/ -e fasta > ../../../bins/maxbin/maxbin_scaffolds2bin.tsv
+```
+## Alteração do formato dos arquivos de bins do CONCOCT
+O DASTool espera separação de elementos por TAB (\t), mas o CONCOCT gera CSV com vírgula. 
+O DASTool geralmente não interpreta headers.
+Remova a header do seu arquivo tsv e substitua o uso de vírgula por tab.
+
+```bash
+cat ../../../bins/concoct/clustering_merged.csv | tr ',' '\t' > ../../../bins/concoct/clustering_merged.tsv
+tail -n +2 ../../../bins/concoct/clustering_merged.tsv > ../../../bins/concoct/clustering_merged_noheader.tsv
 ```
 
-Adicione os nomes dos táxons ao output:
-```bash
-kaiju-addTaxonNames -t db/nodes.dmp -n db/names.dmp -r superkingdom,phylum,class,order,family,genus,species -i ../result/SRR579292_kaiju.out -o ../result/SRR579292_kaiju.names
-```
+## DASTool
 
-Gere os gráficos Krona:
 ```bash
-kaiju2krona -t db/nodes.dmp -n db/names.dmp -i ../result/SRR579292_kaiju.out -o ../result/SRR579292_kaiju2krona.out
-ktImportText -o ../result/SRR579292_krona.html ../result/SRR579292_kaiju2krona.out
+DAS_Tool -i ../../../bins/metabat/metabat_scaffolds2bin.tsv,../../../bins/maxbin/maxbin_scaffolds2bin.tsv,../../../bins/concoct/clustering_merged_noheader.tsv -l metabat,maxbin,concoct -c final.contigs.fa -o ../../../dastool/dastool --search_engine diamond --threads 12 --write_bins
 ```
