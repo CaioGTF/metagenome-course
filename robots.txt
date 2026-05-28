@@ -1,1 +1,1 @@
-Sitemap: https://dalmolingroup.github.io/metagenome-course/sitemap.xml
+Sitemap: https://CaioGTF.github.io/metagenome-course/sitemap.xml
