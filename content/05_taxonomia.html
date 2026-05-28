@@ -375,9 +375,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#contexto" id="toc-contexto" class="nav-link active" data-scroll-target="#contexto"><span class="header-section-number">5.1</span> Contexto</a></li>
   <li><a href="#classificação-taxonômica-dos-bins" id="toc-classificação-taxonômica-dos-bins" class="nav-link" data-scroll-target="#classificação-taxonômica-dos-bins"><span class="header-section-number">5.2</span> Classificação taxonômica dos bins</a></li>
-  <li><a href="#execute-o-gtdb-tk" id="toc-execute-o-gtdb-tk" class="nav-link" data-scroll-target="#execute-o-gtdb-tk"><span class="header-section-number">5.3</span> Execute o GTDB-TK</a></li>
-  <li><a href="#sec-bdalign" id="toc-sec-bdalign" class="nav-link" data-scroll-target="#sec-bdalign"><span class="header-section-number">5.4</span> Adquirindo o banco de dados para o kaiju</a></li>
-  <li><a href="#realizando-a-classificação-taxonômica" id="toc-realizando-a-classificação-taxonômica" class="nav-link" data-scroll-target="#realizando-a-classificação-taxonômica"><span class="header-section-number">5.5</span> Realizando a classificação taxonômica</a></li>
+  <li><a href="#adquirindo-o-banco-de-dados-do-gtdb-tk" id="toc-adquirindo-o-banco-de-dados-do-gtdb-tk" class="nav-link" data-scroll-target="#adquirindo-o-banco-de-dados-do-gtdb-tk"><span class="header-section-number">5.3</span> Adquirindo o banco de dados do GTDB-TK</a></li>
+  <li><a href="#execute-o-gtdb-tk" id="toc-execute-o-gtdb-tk" class="nav-link" data-scroll-target="#execute-o-gtdb-tk"><span class="header-section-number">5.4</span> Execute o GTDB-TK</a></li>
+  <li><a href="#sec-bdalign" id="toc-sec-bdalign" class="nav-link" data-scroll-target="#sec-bdalign"><span class="header-section-number">5.5</span> Adquirindo o banco de dados para o kaiju</a></li>
+  <li><a href="#realizando-a-classificação-taxonômica" id="toc-realizando-a-classificação-taxonômica" class="nav-link" data-scroll-target="#realizando-a-classificação-taxonômica"><span class="header-section-number">5.6</span> Realizando a classificação taxonômica</a></li>
   </ul>
 </nav>
     </div>
@@ -416,7 +417,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="classificação-taxonômica-dos-bins" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="classificação-taxonômica-dos-bins"><span class="header-section-number">5.2</span> Classificação taxonômica dos bins</h2>
-<p>Realizamos a classificação taxonômica dos bins para táxons de Bacteria e Archaea de acordo com a referência GTDB-Tk (Chaumeil et al.&nbsp;2022). ## Adquirindo o banco de dados do GTDB-TK</p>
+<p>Realizamos a classificação taxonômica dos bins para táxons de Bacteria e Archaea de acordo com a referência GTDB-Tk (Chaumeil et al.&nbsp;2022).</p>
+</section>
+<section id="adquirindo-o-banco-de-dados-do-gtdb-tk" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="adquirindo-o-banco-de-dados-do-gtdb-tk"><span class="header-section-number">5.3</span> Adquirindo o banco de dados do GTDB-TK</h2>
 <div class="callout callout-style-simple callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -436,14 +440,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Exporte o banco de dados</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">GTDBTK_DATA_PATH</span><span class="op">=</span>~/.conda/envs/binning/share/gtdbtk-2.7.2/db/release232</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="execute-o-gtdb-tk" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="execute-o-gtdb-tk"><span class="header-section-number">5.3</span> Execute o GTDB-TK</h2>
+<section id="execute-o-gtdb-tk" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="execute-o-gtdb-tk"><span class="header-section-number">5.4</span> Execute o GTDB-TK</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--genome_dir</span> ../../../dastool/dastool_DASTool_bins/ <span class="at">--out_dir</span> ../../../dastool/gtdbtk <span class="at">--extension</span> fa <span class="at">--cpus</span> 12</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Para visualizar os resultados</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> ../../../dastool/gtdbtk/classify/gtdbtk.bac120.summary.tsv</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="sec-bdalign" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="sec-bdalign"><span class="header-section-number">5.4</span> Adquirindo o banco de dados para o kaiju</h2>
+<section id="sec-bdalign" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-bdalign"><span class="header-section-number">5.5</span> Adquirindo o banco de dados para o kaiju</h2>
 <p>Mude o diretório atual para <code>"Pipeline/alignment/db"</code> (pois esse banco também será usado na seção <a href="06_anotacao.html#sec-diamond" class="quarto-xref"><span>Seção 6.2.1</span></a>, do alinhamento) e baixe o banco de dados de proteínas do NCBI-nr:</p>
 <div class="callout callout-style-simple callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -487,8 +491,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="realizando-a-classificação-taxonômica" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="realizando-a-classificação-taxonômica"><span class="header-section-number">5.5</span> Realizando a classificação taxonômica</h2>
+<section id="realizando-a-classificação-taxonômica" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="realizando-a-classificação-taxonômica"><span class="header-section-number">5.6</span> Realizando a classificação taxonômica</h2>
 <p>Mude o diretório atual para “Pipeline/taxonomic” e execute a classificação taxonômica:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kaiju</span> <span class="at">-t</span> db/nodes.dmp <span class="at">-f</span> db/kaijuNR.fmi <span class="at">-i</span> ../data/removal/unaligned_1.fastq <span class="at">-j</span> ../data/removal/unaligned_2.fastq <span class="at">-o</span> ../result/SRR579292_kaiju.out <span class="at">-z</span> 8</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Adicione os nomes dos táxons ao output:</p>

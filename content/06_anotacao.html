@@ -417,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="sec-diamond"><span class="header-section-number">6.2.1</span> Alinhamento</h3>
 <section id="realizando-o-alinhamento" class="level4" data-number="6.2.1.1">
 <h4 data-number="6.2.1.1" class="anchored" data-anchor-id="realizando-o-alinhamento"><span class="header-section-number">6.2.1.1</span> Realizando o alinhamento</h4>
-<p>Mude o diretório atual para <code>"Pipeline/alignment"</code> e alinhe as leituras contra o banco de dados de proteínas de referência (obtido na seção <a href="05_taxonomia.html#sec-bdalign" class="quarto-xref"><span>Seção 5.4</span></a>):</p>
+<p>Mude o diretório atual para <code>"Pipeline/alignment"</code> e alinhe as leituras contra o banco de dados de proteínas de referência (obtido na seção <a href="05_taxonomia.html#sec-bdalign" class="quarto-xref"><span>Seção 5.5</span></a>):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> unaligned.fasta</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">diamond</span> blastx <span class="at">-d</span> index/nr <span class="at">-q</span> ../data/collapsed/SRR579292.fasta <span class="at">-o</span> matches.m8 <span class="at">--top</span> 3 <span class="at">--un</span> unaligned.fasta</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-note callout-titled">
