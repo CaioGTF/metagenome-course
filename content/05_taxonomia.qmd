@@ -10,6 +10,7 @@ e tipicamente acompanha um perfil de abundância desses táxons.
 ## Classificação taxonômica dos bins
 
 Realizamos a classificação taxonômica dos bins para táxons de Bacteria e Archaea de acordo com a referência GTDB-Tk (Chaumeil et al. 2022).
+
 ## Adquirindo o banco de dados do GTDB-TK
 
 ::: callout-warning
