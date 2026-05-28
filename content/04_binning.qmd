@@ -119,3 +119,26 @@ tail -n +2 ../../../bins/concoct/clustering_merged.tsv > ../../../bins/concoct/c
 ```bash
 DAS_Tool -i ../../../bins/metabat/metabat_scaffolds2bin.tsv,../../../bins/maxbin/maxbin_scaffolds2bin.tsv,../../../bins/concoct/clustering_merged_noheader.tsv -l metabat,maxbin,concoct -c final.contigs.fa -o ../../../dastool/dastool --search_engine diamond --threads 12 --write_bins
 ```
+## Analisando a qualidade dos bins pré e pós refinamento do DASTool
+O BUSCO fornece medidas para avaliação quantitativa da montagem do genoma, do conjunto de genes e da completude do transcriptoma, com base em expectativas evolutivamente informadas do conteúdo genético de ortólogos de cópia única quase universais.
+
+Mude para o diretório **Pipeline/dastool**
+
+Desative o ambiente conda "binning'
+```bash
+conda deactivate
+```
+Ative o ambiente conda "metagenomicsTraining"
+```bash
+conda activate metagenomicsTraining
+```
+## Executando o BUSCO
+
+```bash
+ busco -i ../bins/maxbin/maxbin.001.fasta -o busco_maxbin001 -m genome -l bacteria_odb10 -c 12
+```
+Visualize o resultado de forma gráfica:
+
+```bash
+busco --plot busco_maxbin001
+```
